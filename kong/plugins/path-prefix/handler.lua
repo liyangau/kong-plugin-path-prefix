@@ -1,7 +1,4 @@
-local PathPrefixHandler = {
-  PRIORITY = 800,
-  VERSION = "0.2.0"
-}
+local PathPrefixHandler = {PRIORITY = 800, VERSION = "0.2.0"}
 
 local function escape_hyphen(path_prefix, should_escape)
   if should_escape then
