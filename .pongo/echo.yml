@@ -1,0 +1,7 @@
+services:
+  echo:
+    image: mccutchen/go-httpbin
+    restart: on-failure
+    stop_signal: SIGKILL
+    networks:
+      - ${NETWORK_NAME}

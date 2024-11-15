@@ -1,41 +1,37 @@
-_format_version: "2.1"
-
-_transform: true
+_format_version: "3.0"
 
 services:
-  - name: readme-example
-    url: https://mockbin.org/request
+  - name: test1
+    url: https://httpbin.org/anything
     routes:
-      - name: index
-        paths: [ '/' ]
+      - name: nested-route
+        paths: ["/service-with-plugin-route/foobar"]
         strip_path: false
-        protocols: ['http']
-      - name: version
-        paths: [ '/version' ]
+        protocols: ["http"]
+      - name: base-route
+        paths: ["/service-with-plugin-route"]
         strip_path: false
-        protocols: ['http']
-      - name: healthz
-        paths: [ '/healthz' ]
-        strip_path: false
-        protocols: ['http']
+        protocols: ["http"]
     plugins:
       - name: path-prefix
         config:
-          path_prefix: /mock
+          path_prefix: "/service-with-plugin-route"
           forwarded_header: true
-  - name: test
-    url: https://mockbin.org/request
+          escape: true
+  - name: test2
+    url: https://httpbin.org/anything
     routes:
-      - name: nested
-        paths: [ '/service-with-plugin-route/foobar' ]
+      - name: users-route
+        paths: ["~/api/v1/customers/(?P<userID>[0-9]{6})$"]
         strip_path: false
-        protocols: ['http']
-      - name: base
-        paths: [ '/service-with-plugin-route' ]
+        protocols: ["http"]
+      - name: balance-route
+        paths: ["~/api/v1/customers/(?P<userID>[0-9]{6})/balance"]
         strip_path: false
-        protocols: ['http']
+        protocols: ["http"]
     plugins:
       - name: path-prefix
         config:
-          path_prefix: '/service-with-plugin-route'
+          path_prefix: "/api/v1"
           forwarded_header: true
+          escape: true

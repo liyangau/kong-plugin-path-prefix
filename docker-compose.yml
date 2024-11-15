@@ -1,8 +1,6 @@
-version: '3.3'
-
 services:
   kong:
-    image: kong:2.5.0-alpine
+    image: kong:3.8
     ports:
     - 8001:8001
     - 8000:8000
